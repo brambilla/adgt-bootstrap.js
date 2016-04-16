@@ -64,7 +64,8 @@ PeerSet.prototype.retrieveRandomDescriptor = function() {
 
 var server = https.createServer(options, function(request, response) {
     console.log((new Date()) + ' Received request for ' + request.url);
-    response.writeHead(404);
+    response.writeHead(200);
+    response.end('Hello World!');
     response.end();
 });
 server.listen(3000, function() {

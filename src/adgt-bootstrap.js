@@ -135,6 +135,10 @@ function handleDiscoveryRequestMessage(message, connection) {
           type: 'DISCOVERY_RESPONSE'
       };
       connection.send(JSON.stringify(message));
+      console.log('Ho inviato un ' + message.type);
+    } else {
+        //FIXME
+        console.log('In questo caso nessuna risposta');
     }
 }
 

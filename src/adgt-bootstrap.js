@@ -3,8 +3,9 @@ var https = require('https');
 var fs = require('fs');
 
 var options = {
-  key: fs.readFileSync('macbeth.ce.unipr.it.key.pem'),
-  cert: fs.readFileSync('macbeth.ce.unipr.it.cert.pem')
+  key: fs.readFileSync('privkey.pem'),
+  cert: fs.readFileSync('fullchain.pem'),
+  ca: fs.readFileSync('chain.pem')
 };
 
 var PeerSet = function () {
@@ -97,7 +98,7 @@ wsServer.on('request', function(request) {
     connection.on('message', function(message) {
         if (message.type === 'utf8') {
             var UTF8Message = JSON.parse(message.utf8Data);
-            console.log('Ricevuto ' + UTF8Message.type + ' da ' + UTF8Message.sender.key);
+            console.log((new Date()) + ' Ricevuto ' + UTF8Message.type + ' da ' + UTF8Message.sender.key);
             switch(UTF8Message.type) {
                 case "DISCOVERY_REQUEST":
                     handleDiscoveryRequestMessage(UTF8Message, connection);
